@@ -8,8 +8,10 @@ import { AngularFireDatabase } from 'angularfire2/database';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  
   arrData = [];
   myInput;
+  myInputDois;
 
   constructor(public navCtrl: NavController, private fdb: AngularFireDatabase) {
       this.fdb.list("/myItems/").subscribe(_data => {
@@ -21,5 +23,8 @@ export class HomePage {
 
   btnAddClicked(){
     this.fdb.list("/myItems/").push(this.myInput);
+  }
+  btnAddClickedDois(){
+    this.fdb.list("/myAlunos/").push(this.myInputDois);
   }
 }
