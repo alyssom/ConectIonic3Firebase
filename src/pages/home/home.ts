@@ -9,13 +9,17 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 export class HomePage {
   arrData = [];
+  myInput;
 
   constructor(public navCtrl: NavController, private fdb: AngularFireDatabase) {
-      this.fdb.list("/myItens/").push(_data => {
+      this.fdb.list("/myItems/").subscribe(_data => {
         this.arrData = _data;
 
         console.log(this.arrData);
       });
   }
 
+  btnAddClicked(){
+    this.fdb.list("/myItems/").push(this.myInput);
+  }
 }
