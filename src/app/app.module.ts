@@ -11,6 +11,18 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+var config = {
+    apiKey: "AIzaSyBhoUgnF8fWv8u7_RnnDZiXh2y7-wyH21c",
+    authDomain: "app-barbearia.firebaseapp.com",
+    databaseURL: "https://app-barbearia.firebaseio.com",
+    projectId: "app-barbearia",
+    storageBucket: "app-barbearia.appspot.com",
+    messagingSenderId: "491412402447"
+  };
+
 @NgModule({
   declarations: [
     MyApp,
@@ -21,7 +33,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(config),
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
