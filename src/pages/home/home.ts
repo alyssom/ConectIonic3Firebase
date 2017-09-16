@@ -19,6 +19,7 @@ export class HomePage {
 
         console.log(this.arrData);
       });
+
   }
 
   btnAddClicked(){
@@ -26,5 +27,12 @@ export class HomePage {
   }
   btnAddClickedDois(){
     this.fdb.list("/myAlunos/").push(this.myInputDois);
+  }
+
+  delete(i){
+    
+    this.fdb.list("/myItems/").remove(this.arrData[i].$key);
+    this.fdb.list("/myAlunos/").remove(this.arrData[i].$key);
+    
   }
 }
