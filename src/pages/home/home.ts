@@ -19,7 +19,7 @@ export class HomePage {
 
         console.log(this.arrData);
       });
-
+aaaa
   }
 
   btnAddClicked(){
