@@ -8,12 +8,12 @@
   <ion-item>
     <ion-input [(ngModel)]="myInput"></ion-input>
   </ion-item>
-  <button ion-button (click)="btnAddClicked()">Add</button>
+  <button ion-button (click)="btnAddClicked()">Incluir Item</button>
 
   <ion-item>
     <ion-input [(ngModel)]="myInputDois"></ion-input>
   </ion-item>
-  <button ion-button (click)="btnAddClickedDois()">Add 2</button>
+  <button ion-button (click)="btnAddClickedDois()">Incluir Aluno</button>
 
   <ion-list>
     <ion-item *ngFor="let item of arrData ; let i = index" (click)="delete(i)">

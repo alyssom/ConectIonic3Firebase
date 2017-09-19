@@ -19,14 +19,14 @@ export class HomePage {
 
         console.log(this.arrData);
       });
-aaaa
+
   }
 
   btnAddClicked(){
     this.fdb.list("/myItems/").push(this.myInput);
   }
   btnAddClickedDois(){
-    this.fdb.list("/myAlunos/").push(this.myInputDois);
+    this.fdb.list("/myAlunos/SD1").push(this.myInputDois);
   }
 
   delete(i){
