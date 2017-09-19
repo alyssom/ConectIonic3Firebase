@@ -22,17 +22,15 @@ export class HomePage {
 
   }
 
-  btnAddClicked(){
-    this.fdb.list("/myItems/").push(this.myInput);
-  }
+ 
   btnAddClickedDois(){
-    this.fdb.list("/myAlunos/SD1").push(this.myInputDois);
+    this.fdb.list("/Barbearias/LaMafia").push(this.myInputDois);
   }
 
   delete(i){
     
     this.fdb.list("/myItems/").remove(this.arrData[i].$key);
-    this.fdb.list("/myAlunos/").remove(this.arrData[i].$key);
+    this.fdb.list("/myAlunos/SD1").remove(this.arrData[i].$key);
     
   }
 }
