@@ -31,6 +31,7 @@ export class HomePage {
   //inclui de acordo com o caminho.
   btnAddClickedDois(){
     this.fdb.list("/barbearias/la_mafia").push(this.myInputDois);
+
   }
 
   localizarUsuario(){
@@ -46,7 +47,8 @@ export class HomePage {
       var longitude = posicao.coords.longitude;
       alert('Sua latitude estimada é: ' + latitude + ' e longitude: ' + longitude )
       
-      this.fdb.console.log("/barbearias/la_mafia/localizacao");
+      console.log(this.fdb.console("/barbearias/la_mafia"));
+
       // this.urlMaps = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=" +
       //  latitude + 
       //  "," + 
