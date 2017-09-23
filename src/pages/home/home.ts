@@ -13,11 +13,14 @@ export class HomePage {
   myInput;
   myInputDois;
 
+  //String que montara a URL de Rest para API do Maps
+  urlMaps;
+
 
   // atributo fdb contem os dados do banco
   constructor(public navCtrl: NavController, private fdb: AngularFireDatabase) {
     //lista o que tem no array  
-    this.fdb.list("/barbearias/la_mafia").subscribe(_data => {
+    this.fdb.list("/app-barbearia/barbearias/la_mafia/").subscribe(_data => {
         this.arrData = _data;
 
         console.log(this.arrData);
@@ -42,10 +45,21 @@ export class HomePage {
       var latitude = posicao.coords.latitude;
       var longitude = posicao.coords.longitude;
       alert('Sua latitude estimada é: ' + latitude + ' e longitude: ' + longitude )
+      
+      this.fdb.console.log("/barbearias/la_mafia/localizacao");
+      // this.urlMaps = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=" +
+      //  latitude + 
+      //  "," + 
+      //  longitude + 
+      //  "&destinations=" +  +
+      //  "&key=AIzaSyANZi-SnGRkevD4VJET3SuzDNga630NYm0";
+
     }
     function erro(error){
       console.log(error)
     }
+  
+  
   }
 
 
