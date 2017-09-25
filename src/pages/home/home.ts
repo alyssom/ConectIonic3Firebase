@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 
+
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -15,24 +17,44 @@ export class HomePage {
 
   //String que montara a URL de Rest para API do Maps
   urlMaps;
-
-
+  
+  
   // atributo fdb contem os dados do banco
   constructor(public navCtrl: NavController, private fdb: AngularFireDatabase) {
     //lista o que tem no array  
     this.fdb.list("/app-barbearia/barbearias/la_mafia/").subscribe(_data => {
-        this.arrData = _data;
+      
+      this.arrData = _data;
+      console.log(this.arrData);
 
-        console.log(this.arrData);
-      });
+    
+     
 
+    });
+
+   
+   
+    var i = this.fdb.object('barbearias/la_mafia', {preserveSnapshot: true})
+    i.subscribe(snapshot=> {
+      console.log(snapshot.key)
+      console.log(snapshot.val().localizacao)
+    })
+    console.log(this.fdb.list('barbearias/la_mafia/localizacao', {preserveSnapshot: true}).subscribe(
+      snapshots=>{
+        snapshots.forEach(snapshot=> {
+          console.log(snapshot.key, snapshot.val())
+        })
+      }
+    
+    ))
   }
-
+  
   //inclui de acordo com o caminho.
   btnAddClickedDois(){
     this.fdb.list("/barbearias/la_mafia").push(this.myInputDois);
 
   }
+
 
   localizarUsuario(){
     if (window.navigator && window.navigator.geolocation) {
@@ -47,8 +69,8 @@ export class HomePage {
       var longitude = posicao.coords.longitude;
       alert('Sua latitude estimada é: ' + latitude + ' e longitude: ' + longitude )
       
-      console.log(this.fdb.console("/barbearias/la_mafia"));
-
+      
+     
       // this.urlMaps = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=" +
       //  latitude + 
       //  "," + 
