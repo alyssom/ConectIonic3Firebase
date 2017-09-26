@@ -38,6 +38,7 @@ var config = {
     AngularFireModule.initializeApp(config),
 
   ],
+  
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,

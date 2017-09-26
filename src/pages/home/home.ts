@@ -5,58 +5,60 @@ import { AngularFireDatabase } from 'angularfire2/database';
 
 
 
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
   //Array onde serao intupados os dados
-  arrData = [];
   myInput;
   myInputDois;
+  
 
   //String que montara a URL de Rest para API do Maps
-  urlMaps;
+  
   
   
   // atributo fdb contem os dados do banco
-  constructor(public navCtrl: NavController, private fdb: AngularFireDatabase) {
-    //lista o que tem no array  
-    this.fdb.list("/app-barbearia/barbearias/la_mafia/").subscribe(_data => {
-      
-      this.arrData = _data;
-      console.log(this.arrData);
-
+  constructor(public navCtrl: NavController, private fdb: AngularFireDatabase,) {
     
-     
+      //pega valor de uma determinada chave...
+      // var i = this.fdb.object('barbearias/la_mafia', {preserveSnapshot: true})
+      // i.subscribe(snapshot=> {
+      //   console.log(snapshot.key)
+      //   this.localizacaoBarbearia = snapshot.val().localizacao;
+      //   console.log(this.localizacaoBarbearia);
+      // })
+}
+  
 
-    });
+       
 
-   
-   
-    var i = this.fdb.object('barbearias/la_mafia', {preserveSnapshot: true})
-    i.subscribe(snapshot=> {
-      console.log(snapshot.key)
-      console.log(snapshot.val().localizacao)
-    })
-    console.log(this.fdb.list('barbearias/la_mafia/localizacao', {preserveSnapshot: true}).subscribe(
-      snapshots=>{
-        snapshots.forEach(snapshot=> {
-          console.log(snapshot.key, snapshot.val())
-        })
-      }
-    
-    ))
-  }
+
+
   
   //inclui de acordo com o caminho.
   btnAddClickedDois(){
     this.fdb.list("/barbearias/la_mafia").push(this.myInputDois);
 
+    
+
   }
 
 
   localizarUsuario(){
+    
+    var localizacaoBarbearia;
+    var urlMaps;
+    var i = this.fdb.object('barbearias/la_mafia', {preserveSnapshot: true})
+    i.subscribe(snapshot=> {
+      console.log(snapshot.key)
+      localizacaoBarbearia = snapshot.val().localizacao;
+      console.log(localizacaoBarbearia);
+    })
+
+
     if (window.navigator && window.navigator.geolocation) {
      var geolocation = window.navigator.geolocation;
      geolocation.getCurrentPosition(sucesso, erro);
@@ -69,28 +71,39 @@ export class HomePage {
       var longitude = posicao.coords.longitude;
       alert('Sua latitude estimada é: ' + latitude + ' e longitude: ' + longitude )
       
-      
+      urlMaps = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=" +
+      latitude + 
+      "," + 
+      longitude + 
+      "&destinations=" + localizacaoBarbearia +
+      "&key=AIzaSyDl3kN1tvhtZMhXKy_zVmpnHmVty8PXYBg";
+
      
-      // this.urlMaps = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=" +
-      //  latitude + 
-      //  "," + 
-      //  longitude + 
-      //  "&destinations=" +  +
-      //  "&key=AIzaSyANZi-SnGRkevD4VJET3SuzDNga630NYm0";
+     
+      // ------------------------------------------------------------------------------------------------
+      //-------------------------NÃO ESTA FUNCIONANDO ESTA PARTE DO REQUEST------------------------------
+      //-------------------------------------------------------------------------------------------------
+      
+      // var xhttp = new XMLHttpRequest();
+      // xhttp.open("GET", urlMaps , true);
+      // xhttp.setRequestHeader("Content-type", "application/json");
+      // xhttp.send();
+      // var response = JSON.parse(xhttp.responseText);
+
+      // console.log(response)
+
 
     }
     function erro(error){
       console.log(error)
     }
   
-  
   }
-
 
   //deleta conforme o caminho com acao de clica
   delete(i){
     
-    this.fdb.list("/barbearias/la_mafia").remove(this.arrData[i].$key);
+    this.fdb.list("/barbearias/la_mafia").remove();
     
   }
 }
