@@ -9,22 +9,23 @@
   <ion-item>
     <ion-input [(ngModel)]="myInputDois"></ion-input>
   </ion-item>
-  <button ion-button (click)="btnAddClickedDois()">Incluir Barbearia</button>
-  <button ion-button (click)="localizarUsuario()">Obter Localização Atual</button>
+
   <ion-list>
     <ion-item ng-value="localizarUsuario">
-      
-
+ 
+ 
     </ion-item>
   </ion-list>
-    <ion-item *ngFor="let item of barbearias; let i = index">
-      {{item.nome}} <br>
-      {{item.localizacao}}
-      
-    </ion-item>
+  <ion-item *ngFor="let item of barbearias; let i = index">
+    <ion-icon ios="ios-home" md="md-home"></ion-icon> {{item.nome}}
+    <div style="float:right">
+
+      <ion-icon ios="ios-navigate" md="md-navigate"></ion-icon> {{item.distancia }} M</div>
+
+  </ion-item>
   <ion-list>
 
   </ion-list>
-
  
+
 </ion-content>

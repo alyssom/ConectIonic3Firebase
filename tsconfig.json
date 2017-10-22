@@ -4,6 +4,7 @@
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "typeRoots": [ "./node_modules/@types" ],
     "lib": [
       "dom",
       "es2015"
@@ -19,6 +20,7 @@
   "exclude": [
     "node_modules"
   ],
+ 
   "compileOnSave": false,
   "atom": {
     "rewriteTsconfig": false
